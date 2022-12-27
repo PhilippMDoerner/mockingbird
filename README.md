@@ -28,10 +28,11 @@ import std/[sugar, unittest]
 
 
 suite "Test add5":  
+  # Important for the teardown in order to "reset" the mocks
   let get5Original = get5
   
   teardown:
-    get5 = get5Original
+    get5 = get5Original # "Resets" the mock to provide the normal behaviour again
 
   test """
     Given get5 returns 5
