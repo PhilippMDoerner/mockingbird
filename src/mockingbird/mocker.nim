@@ -1,11 +1,14 @@
 import std/[os, strutils, macros, sets, hashes]
 import ./pragma
 
+export macros
+
 const pragmaNodeIndex = 4
 
 proc isEmpty(node: NimNode): bool = node.kind == nnkEmpty
 proc isPostfixNode(node: NimNode): bool = node.kind == nnkPostfix
-proc isMockable(node: NimNode): bool = node.kind in {nnkProcDef, nnkFuncDef}
+proc isMockable(node: NimNode): bool = 
+  node.kind in {nnkProcDef, nnkFuncDef}
 
 proc isExported(procNode: NimNode): bool =
   ## Exported Procs have a "*" symbol in the Postfix Nimnode
@@ -32,33 +35,28 @@ proc addPragma(procNode: NimNode, pragmaName: string): NimNode =
 
   result[pragmaNodeIndex] = pragmaNode
 
-proc addMockPragma(filePath: string) {.compileTime.} =
+proc parseModule*(filePath: string): NimNode =
+  return parseStmt(staticRead(filePath))
+
+proc writeModule*(moduleNode: NimNode, filePath: string) =
+  writeFile(filePath, moduleNode.repr)
+
+proc addMockPragma*(moduleNode: var NimNode): NimNode {.compileTime.} =
   let mockPragmaName = "mockable"
-  let file = parseStmt(staticRead(filePath))
   var newModule = newStmtList()
   
-  var hadMockables = false
-  for stmt in file:
+  for stmt in moduleNode:
     if stmt.isMockable(): ## Add mock pragma
-      hadMockables = true
       newModule.add addPragma(stmt, mockPragmaName)
     else:
       newModule.add stmt
-
-  if hadMockables:
-    writeFile(filePath, newModule.repr)
-
-proc addMockPragmas(filePaths: seq[string]) {.compileTime.}=
-  for path in filePaths:
-    addMockPragma(path)
+      
+  result = newModule
 
 proc addMockToProject*(ignore: seq[string] = @[]) =
   const projectPath = getProjectPath()
   for path in projectPath.walkDirRec:
     if path.endsWith(".nim") and path.extractFileName() notin ignore:
-      addMockPragma(path)
-
-proc addMockToModule*(modulePath: string) =
-  doAssert modulePath.endsWith(".nim")
-  
-  addMockPragma(modulePath)
+      var moduleNode = parseModule(path)
+      var newModuleNode = addMockPragma(moduleNode)
+      writeModule(newModuleNode, path)

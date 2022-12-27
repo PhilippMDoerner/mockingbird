@@ -1,0 +1,89 @@
+<mxfile host="65bd71144e">
+    <diagram id="bKo65RRr0gXhGwOgnKGA" name="Page-1">
+        <mxGraphModel dx="873" dy="398" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="21" value="&lt;b&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;Mock Call Behaviour (enabled via &quot;-d:mock&quot;)&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="235" y="620" width="580" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;b&gt;ModuleUnderTest.nim&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;span&gt;&lt;div&gt;&lt;span&gt;Proc under Test:&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;div&gt;proc a() =&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; otherProc()&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="660" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="&lt;div&gt;&lt;span&gt;&lt;b&gt;OtherModule.nim&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span&gt;(no longer has `otherProc` proc, just a variable with that name)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span&gt;var otherProc() = () =&amp;gt;&amp;nbsp;&lt;/span&gt;&lt;span&gt;echo &quot;OtherProc&quot;&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="660" width="230" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="() =&amp;gt; echo &quot;Mockproc&quot;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="685" y="717" width="130" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="&lt;b&gt;TestModule.nim&lt;br&gt;&lt;/b&gt;&lt;br&gt;TestSuite:&lt;br&gt;&amp;nbsp; test:&lt;br&gt;&amp;nbsp; &amp;nbsp; otherProc = () =&amp;gt; echo &quot;MockProc&quot;&lt;br&gt;&amp;nbsp; &amp;nbsp; a()&lt;br&gt;&amp;nbsp; &amp;nbsp; ...validate that a does intended thing..." style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;align=left;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="180" y="849" width="240" height="111" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="() =&amp;gt; echo &quot;Mockproc&quot;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="940" width="130" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" style="edgeStyle=none;html=1;entryX=0.38;entryY=1;entryDx=0;entryDy=0;exitX=0.875;exitY=0.64;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="40" target="25">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="300" y="740" as="targetPoint"/>
+                        <mxPoint x="330" y="801.4285714285716" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="677" y="920"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="56" value="1. Insert mockProc into&lt;br&gt;otherProc variable" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="22">
+                    <mxGeometry x="-0.0577" y="2" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="42" value="" style="edgeStyle=none;html=1;fontSize=12;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.05;exitY=0.82;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="40" target="24">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="191.92000000000007" y="886.0239999999999" as="sourcePoint"/>
+                        <mxPoint x="292" y="740" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="152" y="940"/>
+                            <mxPoint x="152" y="780"/>
+                            <mxPoint x="300" y="780"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="43" value="2. Test calls proc &lt;br&gt;under test &quot;a()&quot;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="42">
+                    <mxGeometry x="-0.3576" relative="1" as="geometry">
+                        <mxPoint x="78" y="-74" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="47" value="&lt;b&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;Normal Call Behaviour&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="340" width="580" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="1" source="50" target="51">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="a() calls otherProc" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="48">
+                    <mxGeometry x="-0.4939" relative="1" as="geometry">
+                        <mxPoint x="33" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="50" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;b&gt;ModuleUnderTest.nim&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;span&gt;&lt;div&gt;&lt;span&gt;Proc under Test:&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;div&gt;proc a*() =&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; otherProc()&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+                    <mxGeometry x="225" y="380" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="&lt;div&gt;&lt;span&gt;&lt;b&gt;OtherModule.nim&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span&gt;proc otherProc*() = &lt;/span&gt;&lt;span&gt;echo &quot;OtherProc&quot;&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+                    <mxGeometry x="585" y="380" width="230" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" value="Calls a()" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="1" source="53" target="50">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="SomeOtherModule.nim" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="222" y="527" width="145" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" style="edgeStyle=none;html=1;entryX=0;entryY=0.875;entryDx=0;entryDy=0;fontSize=12;exitX=0.5;exitY=0.875;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;" edge="1" parent="1" source="24" target="25">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="3. a() calls otherProc&lt;br&gt;Variable" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="44">
+                    <mxGeometry x="-0.4939" relative="1" as="geometry">
+                        <mxPoint x="105" y="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
