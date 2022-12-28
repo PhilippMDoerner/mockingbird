@@ -4,11 +4,9 @@ import ./mocker
 proc isNimFilePath(path: string): bool = path.endsWith(".nim")
 
 proc handleNimModule(modulePath: string, newPath: string) =
-  let moduleStr = staticRead(modulePath)
   echo "Parsing: ", modulePath
-  var moduleNode = parseStmt(moduleStr)
+  var moduleNode = parseStmt(staticRead(modulePath))
   var mockableModuleNode = addMockPragma(moduleNode)
-  echo mockableModuleNode.repr
   mockableModuleNode.writeModule(newPath)
 
 proc handleFile(filePath: string, newPath: string) =
