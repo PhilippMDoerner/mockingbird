@@ -9,6 +9,8 @@ Just add the `{.mockable.}` pragma to your exported procs, compile with the `--d
 The pragma turns any proc annotated with it into a variable that can be assigned to.
 You can then "mock" procs by simply assigning a different procedure to that variable.
 
+**Note: This currently does not work with generics! I'm looking into how to get there but it's hard**
+
 # Example
 ```nim
 # get5Module.nim
